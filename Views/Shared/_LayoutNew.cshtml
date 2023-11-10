@@ -1,0 +1,365 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <style>
+
+
+        .float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+        }
+
+        .my-float {
+            margin-top: 16px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a href="#"><img src="~/img/logo1.png" alt=""></a>
+        </div>
+        <div class="humberger__menu__cart">
+            <ul>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            </ul>
+            <div class="header__cart__price">Eşyalar: <span>150.00₺</span></div>
+        </div>
+        <div class="humberger__menu__widget">
+            @* <div class="header__top__right__language">
+            <img src="img/language.png" alt="">
+            <div>English</div>
+            <span class="arrow_carrot-down"></span>
+            <ul>
+            <li><a href="#">Türkçe</a></li>
+            <li><a href="#">English</a></li>
+            </ul>
+            </div>*@
+            <div class="header__top__right__auth">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"> <i class="fa fa-user"></i>Giriş Yap</a>
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"> <i class="fa fa-user"></i>Üye Ol</a>
+            </div>
+
+
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li class="active"><a href="./index.html">Anasayfa</a></li>
+                <li><a href="./shop-grid.html">Alışveriş</a></li>
+                <li>
+                    <a href="#">Sayfalar</a>
+                    <ul class="header__menu__dropdown">
+                        <li><a href="./shop-details.html">Alışveriş Detayları</a></li>
+                        <li><a href="./shoping-cart.html">Alışveriş Sepeti</a></li>
+                        <li><a href="./checkout.html">Kontrol Et</a></li>
+                        <li><a href="./blog-details.html">Blog Detayları</a></li>
+                    </ul>
+                </li>
+
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a asp-action="Index" asp-controller="Admin">Admin Panel</a></li>
+                }
+
+
+                <li><a asp-action="Kategoriler" asp-controller="Home"><i class="fa fa-bars" aria-hidden="true"></i>&nbsp; Kategoriler</a></li>
+
+                <li><a href="./blog.html">Blog</a></li>
+                <li><a href="./contact.html">İletişim</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        </div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> emmirhancelik@gmail.com</li>
+                <li>Tüm 99₺ ve üzeri alışverişte kargo bedava!</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Humberger End -->
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> emmirhancelik@gmail.com</li>
+                                <li>Tüm 99₺ ve üzeri alışverişte kargo bedava!</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                            @*   <div class="header__top__right__language">
+                            <img src="img/language.png" alt="">
+                            <div>English</div>
+                            <span class="arrow_carrot-down"></span>
+                            <ul>
+                            <li><a href="#">Türkçe</a></li>
+                            <li><a href="#">English</a></li>
+                            </ul>
+                            </div>*@
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Merhaba, @ViewData["ad"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                      @*  <p>@String.Concat("Sepet(", @ViewData["adet"],")")</p>*@
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+
+                                <div class="header__top__right__auth">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-user"></i>Giriş</a>
+
+                                </div>
+                                <div class="header__top__right__auth">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="fa-solid fa-user-plus"></i>Üye Ol</a>
+                                </div>
+                            }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="header__logo">
+                            <a href="./index.html"><img src="~/img/logo1.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <nav class="header__menu">
+                            <ul>
+                                <li class="active"><a href="./index.html">Anasayfa</a></li>
+                                <li><a href="./shop-grid.html">Alışveriş</a></li>
+                                <li>
+                                    <a href="#">Sayfalar</a>
+                                    <ul class="header__menu__dropdown">
+                                        <li><a href="./shop-details.html">Alışveriş Detayları</a></li>
+                                        <li><a href="./shoping-cart.html">Alışveriş Sepeti</a></li>
+                                        <li><a href="./checkout.html">Kontrol Et</a></li>
+                                        <li><a href="./blog-details.html">Blog Detayları</a></li>
+                                    </ul>
+                                </li>
+                                <li><a asp-action="Kategoriler" asp-controller="Home"><i class="fa fa-bars" aria-hidden="true"></i>&nbsp; Kategoriler</a></li>
+
+                                <li><a href="./blog.html">Blog</a></li>
+                                <li><a href="./contact.html">İletişim</a></li>
+
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                    <li> <a asp-action="Index" asp-controller="Admin">Admin Panel</a></li>
+                                                    }
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="header__cart">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-heart"></i> </a></li>
+                            <li>
+                                <a asp-action="Index" asp-controller="ShoppingCart">
+                                    <i class="fa fa-shopping-bag"></i> <span>
+                                        @ViewData["adet"]</span> </a></li>
+                            <li>
+                               <partial name="CartSummary" />
+                            </li>
+                            <li>
+                                <partial name="HavaDurumu" />
+                            </li>
+                            </ul>
+                                                @*<div class="header__cart__price">Eşyalar: <span>150.00₺</span></div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="humberger__open">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+        </header>
+
+
+
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                                        @RenderBody()
+            </main>
+        </div>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a href="https://api.whatsapp.com/send?phone=++905388987652&amp;text=Merhaba, yardımcı olabilir misiniz?" class="float" target="_blank">
+            <i class="fa fa-whatsapp my-float"></i>
+        </a>
+
+        <footer class="footer spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer__about">
+                            <div class="footer__about__logo">
+                                <a href="./index.html"><img src="~/img/logo1.png" alt=""></a>
+                            </div>
+                            <ul>
+                                                        @*	<li>Adres: Zafer mh. Ahmet Yesevi cd. Canlı sk. NO:55 D:1 Bahçelievler/İSTANBUL</li>*@
+
+                                <li>
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96341.62319697041!2d28.756005734116265!3d41.01047028080295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab9e7a7777c43%3A0x4c76cf3dcc8b330b!2sGalata%20Kulesi!5e0!3m2!1str!2str!4v1696524378983!5m2!1str!2str" width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </li>
+                                <li>Telefon: +90 538 898 7652</li>
+                                <li>Eposta: emmirhancelik@gmail.com</li>
+                            </ul>
+                            <ul>
+                                <li>
+                                <a><img src="~/img/qrcode.png" /></a>
+                                </li>
+                            </ul>
+                            <ul>
+                             
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                        <div class="footer__widget">
+                            <h6>İşe Yarar Linkler</h6>
+                            <ul>
+                                <li><a href="#">Hakkımızda</a></li>
+                                <li><a href="#">Mağazamız Hakkında</a></li>
+                                <li><a href="#">Güvenli Alışveriş</a></li>
+                                <li><a href="#">Teslimat Bilgileri</a></li>
+                                <li><a href="#">Gizlilik Politikası</a></li>
+                                <li><a href="#">Site Haritamız</a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="#">Biz Kimiz</a></li>
+                                <li><a href="#">Servislerimiz</a></li>
+                                <li><a href="#">Projeler</a></li>
+                                <li><a href="#">İletişim</a></li>
+                                <li><a href="#">Yenilikler</a></li>
+                                <li><a href="#">Görüşler</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="footer__widget">
+                            <h6>Bültenimize Şimdi Katılın</h6>
+                            <p>En son mağazamız ve özel tekliflerimiz hakkında e-posta güncellemelerini alın.</p>
+                            <form action="#">
+                                <input type="text" placeholder="Eposta adresinizi giriniz">
+                                <button type="submit" class="site-btn">Abone Ol</button>
+                            </form>
+                            <div class="footer__widget__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer__copyright">
+                            <div class="footer__copyright__text">
+                                <p>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> Tüm hakları saklıdır
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
+                            </div>
+                            <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Section End -->
+        <!-- Js Plugins -->
+        <script src="~/js/jquery-3.3.1.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="~/js/jquery.nice-select.min.js"></script>
+        <script src="~/js/jquery-ui.min.js"></script>
+        <script src="~/js/jquery.slicknav.js"></script>
+        <script src="~/js/mixitup.min.js"></script>
+        <script src="~/js/owl.carousel.min.js"></script>
+        <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    </body>
+    </html>

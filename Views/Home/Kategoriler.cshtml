@@ -1,0 +1,163 @@
+﻿@{
+    Layout = "_LayoutNew"; //default ogani tasarımını göstermek için 
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"> </script>
+
+@*<input type="datetime-local" placeholder="KategoriId Giriniz"/>*@
+<input type="number" min="3" onkeypress="goster()" placeholder="KategoriId Giriniz" id="kategoriid" />
+<button type="button" id="btnGetir" class="btn btn-outline-danger" onclick="getir()" style="border-radius:50%" >Getir</button>
+<div>
+    <p> <strong id="kategoriAd"></strong> </p>
+</div>
+
+
+<input type="text" id="kategoriadi" placeholder="Kategori Ad" />
+<button type="button" id="btnKaydet" class="btn btn-outline-success" onclick="kaydet()" style="border-radius:50%">Kaydet</button>
+
+<br />
+
+<input type="number"  placeholder="KategoriId Giriniz" id="kategoriidguncellenecekid" />
+<button type="button" id="btnGetir2" class="btn btn-outline-danger" onclick="getirHepsi()" style="border-radius:50%">Getir</button>
+<div>
+    <input type="text" id="kategoriAdim" style="display:none;" />
+    <input type="text" id="kategoriFotoPath" style="display:none;" />
+    <input type="text" id="kategoriDescription" style="display:none;" />
+</div>
+
+<input type="text" id="kategoriadi" placeholder="Kategori Id" style="display:none;" />
+<button type="button" id="btnGuncelle" class="btn btn-outline-success" onclick=" Update()" style="border-radius:50%;display:none;">Güncelle</button>
+
+
+
+
+
+<script>
+
+
+    //function guncelle() {
+    //    alert("1.1");
+    //    let kategoriId2 = document.getElementById('kategoriadi').value;
+    //    let kategoriDesc2 = document.getElementById('kategoriDescription').value;
+    //    let kategoriAd2 = document.getElementById('kategoriAdim').value;
+    //    let kategoriFotoPath2 = document.getElementById('kategoriFotoPath').value;
+    //    alert("1.2");
+    //    alert(kategoriAdi);
+    //    $.ajax({
+    //        url: "/Home/KategoriGuncelle/?kategoriId=" + kategoriId2 + "&desc=" + kategoriDesc2 + "&kategoriAd="kategoriAd2+ "&kategoriFotoPath=" + kategoriFotoPath2,
+    //        type: "POST",
+    //        dataType: 'json',
+    //        success: function (datax) {
+    //            alert("kayıt başarılı");
+    //        },
+    //        error: function () {
+    //            alert("hata");
+    //        }
+    //        })
+    //    }
+
+
+
+    function Update() {
+        let id = $("#kategoriidguncellenecekid").val();
+        let name = $("#kategoriAdim").val();
+        let path = $("#kategoriFotoPath").val();
+        let description = $("#kategoriDescription").val();
+        alert(id);
+        $.ajax({
+            url: "/Home/KategoriGuncelle/?id=" + id + "&name=" + name + "&path=" + path + "&description=" + description,
+            type: "POST",
+            dataType: "JSON",
+            success: function () {
+                alert("BAŞARILI!");
+            },
+            error: function () {
+                alert("HATA!");
+            }
+        })
+    }
+
+
+
+    function getirHepsi(){
+        var id = document.getElementById('kategoriidguncellenecekid').value;
+       
+
+        $.ajax({
+            url: "/Home/KategoriGetirIdyeGore/" + id,
+            type: "POST",
+            dataType: 'json',
+            success: function (datax) {
+
+                var data = $.parseJSON(datax);
+                if (data !== null) {
+                    console.log(data.Name);
+                    document.getElementById('kategoriDescription').style='block';
+                    document.getElementById('kategoriAdim').style='block';
+                    document.getElementById('kategoriFotoPath').style = 'block';
+                    document.getElementById('btnGuncelle').style = 'block';
+                    $("#kategoriAdim").val(data.Name);
+                    $("#kategoriFotoPath").val(data.Path);
+                    $("#kategoriDescription").val(data.Description);
+                }
+                else {
+                    $("#kategoriAd").html("yok");
+                }
+
+
+            },
+            error: function () {
+                alert("hata");
+            }
+        })
+    }
+
+    function goster(){
+        alert("a");
+    }
+  
+    function getir(){
+        var id=document.getElementById('kategoriid').value; //value değeri okumak için
+        //alert(kategoriid); //o text deki değeri alabildik
+
+        $.ajax({
+            url: "/Home/KategoriIdyeGoreGetir/" + id,
+            type:"POST",
+            dataType:'json',
+            success: function(datax){      
+              
+                    var data = $.parseJSON(datax);
+                    if(data!==null){
+                         console.log(data.Name);
+                      $("#kategoriAd").html(data.Name);
+                    }
+                    else{
+                        $("#kategoriAd").html("yok");
+                    }       
+              
+            
+            },
+            error: function(){
+                alert("hata");
+            }
+        })
+    }
+
+    function kaydet() {
+        var kategoriAdi = document.getElementById('kategoriadi').value; //value değeri okumak için
+        //alert(kategoriid); //o text deki değeri alabildik
+        alert(kategoriAdi);
+        $.ajax({
+            url: "/Home/KategoriKaydet/?kategoriAd=" + kategoriAdi,
+            type: "POST",
+            dataType: 'json',            
+            success: function (datax) {               
+                alert("kayıt başarılı");
+            },
+            error: function () {
+                alert("hata");
+            }
+        })
+    }
+
+</script>

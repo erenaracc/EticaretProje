@@ -1,0 +1,29 @@
+﻿@model IEnumerable<EticaretProje.Models.Artist>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    <a asp-action="SanatcininAlbumleriniGetir" asp-controller="Admin" asp-route-id="@item.ArtistId"> @item.Name </a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ArtistId">Edit</a> |
+                    <a asp-action="SanatciDetails" asp-controller="Admin" asp-route-id="@item.ArtistId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ArtistId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

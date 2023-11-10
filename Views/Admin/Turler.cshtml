@@ -1,0 +1,46 @@
+﻿@model IEnumerable<EticaretProje.Models.Genre>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Path)
+            </th>
+            <th>Görsel</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Path)
+            </td>
+                <td>
+                  
+                <img src="@String.Concat("../../",item.Path)" style="width:100px;height:70px;"/>
+            </td>
+            <td>
+                <a asp-action="EditTurFileUpload" asp-route-id="@item.GenreId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.GenreId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GenreId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

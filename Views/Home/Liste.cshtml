@@ -1,0 +1,38 @@
+﻿@*Ajax 
+ Javascript teknolojisidir.
+ Asynchronous JavaScript and XML 
+
+ kullanabilmek için jquery kutuphanesini eklemek gerekir.
+
+*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<button type="button" id="btnKategorileriGetir" class="btn btn-outline-primary">Getir</button>
+
+<div>Kategoriler Buraya Gelecek</div>
+
+
+<script>
+    @*kullanıcı buttona tıklayınca c# tarafındaki bir backend metoda düşecek, genres tablosundan kategoriler çekilecek gelen veri önyüzde yukarıdaki div içerisinde gösterilecek
+    *@
+
+        $('#btnKategorileriGetir').click(x=>
+            {
+                $.ajax({
+                    contentType:"application/json",
+                    url:"/Home/KategorileriGetir",
+
+                    success: function{
+                        alert("başarılı");
+                    },
+                    error: function{
+                        alert("hata");
+                    }
+                })
+            }
+
+        )
+</script>
+
+
+
